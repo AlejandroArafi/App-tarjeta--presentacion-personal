@@ -17,3 +17,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: CaviarDreams
+      fonts:
+        - asset: assets/fonts/CaviarDreams.ttf
+
+    - family: Autography
+      fonts:
+        - asset: assets/fonts/Autography.otf
+
+
+  assets:
+    - assets/images/

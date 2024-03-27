@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
@@ -15,17 +17,30 @@ class MainApp extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Center(child: Text('Hello World')),
+            const Center(
+              child: Text(
+                'Hello World',
+                style: TextStyle(
+                  fontFamily: 'Autography',
+                ),
+              ),
+            ),
             Center(
               child: Container(
-                width: 100,
-                height: 100,
+                width: 150,
+                height: 150,
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: ClipOval(
-                    child: Image.network(
-                      'https://i.pinimg.com/736x/e9/0a/d9/e90ad9089efcba98caee7728cb3cf9e5.jpg',
-                      fit: BoxFit.cover,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.cyan, width: 3.0),
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/IMG_7364.JPG',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -34,8 +49,60 @@ class MainApp extends StatelessWidget {
             const Center(
               child: Text(
                 'Alejandro Figueroa',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontFamily: 'CaviarDreams',
+                ),
               ),
-            )
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 80.0),
+              child: Text(
+                'Front end Developer',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontFamily: 'Autography',
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 14),
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: ListView(
+                shrinkWrap:
+                    true, // Importante para usar ListView dentro de otro scrollable como Column
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Card(
+                    color: Colors.cyan[50],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    margin: EdgeInsets.only(bottom: 8.0),
+                    child: const ListTile(
+                      leading: Icon(
+                        Icons.phone,
+                        color: Colors.white,
+                      ),
+                      title: Text('Telefono'),
+                      subtitle: Text('1234567890'),
+                    ),
+                  ),
+                  Card(
+                    color: Colors.cyan[50],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    margin: EdgeInsets.only(bottom: 8.0),
+                    child: const ListTile(
+                      leading: Icon(Icons.email),
+                      title: Text('Email'),
+                      subtitle: Text('alejandro.arafi@gmail.com'),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
