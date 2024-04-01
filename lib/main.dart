@@ -22,7 +22,7 @@ class _MainAppState extends State<MainApp> {
 
   Widget _getBody() {
     switch (_selectedIndex) {
-      case 0:
+      case 1:
         return SafeArea(
             child: Center(
           child: Padding(
@@ -68,7 +68,7 @@ class _MainAppState extends State<MainApp> {
         ));
 
       // Página de Perfil
-      case 1:
+      case 0:
         return SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -175,12 +175,12 @@ class _MainAppState extends State<MainApp> {
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.navigate_next),
-              label: 'Acerca de mi',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.person_outline),
               label: 'Perfil',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.navigate_next),
+              label: 'Acerca de',
             ),
           ],
           currentIndex: _selectedIndex,
