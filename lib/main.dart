@@ -32,7 +32,7 @@ class _MainAppState extends State<MainApp> {
                 Padding(
                   padding: const EdgeInsets.only(top: 110.0),
                   child: Text(
-                    'Acerca de mi', // Cambia esto por tu título
+                    'Acerca de mi',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
