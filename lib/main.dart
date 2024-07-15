@@ -30,39 +30,17 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
+            CustomPadding(
               padding: EdgeInsets.only(top: 130.0),
-              child: Center(
-                child: Text(
-                  ' ',
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
+              child: Text(
+                ' ',
+                style: TextStyle(
+                  fontSize: 24,
                 ),
               ),
             ),
+            ProfilePicture(),
             Center(
-              child: Container(
-                width: 150,
-                height: 150,
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.cyan, width: 3.0),
-                    ),
-                    child: ClipOval(
-                      child: Image.asset(
-                        'assets/images/IMG_7364.JPG',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const Center(
               child: Text(
                 'Alejandro Figueroa',
                 style: TextStyle(
@@ -71,51 +49,14 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(bottom: 80.0),
               child: Text(
                 'Front end Developer',
                 style: TextStyle(fontSize: 30, fontFamily: 'Autography'),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.only(left: 14),
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: ListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  Card(
-                    color: const Color(0xFFE0F7FA),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    margin: const EdgeInsets.only(bottom: 8.0),
-                    child: const ListTile(
-                      leading: Icon(
-                        Icons.phone_android_rounded,
-                        color: Color.fromARGB(244, 32, 159, 168),
-                      ),
-                      title: Text('Telefono'),
-                      subtitle: Text('1234567890'),
-                    ),
-                  ),
-                  Card(
-                    color: const Color(0xFFE0F7FA),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    margin: const EdgeInsets.only(bottom: 8.0),
-                    child: const ListTile(
-                      leading: Icon(Icons.email,
-                          color: Color.fromARGB(244, 32, 159, 168)),
-                      title: Text('Email'),
-                      subtitle: Text('alejandro@example.com'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            ContactInfo(),
           ],
         ),
       ),
@@ -142,6 +83,109 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class CustomPadding extends StatelessWidget {
+  final Widget child;
+  final EdgeInsetsGeometry padding;
+  const CustomPadding({Key? key, required this.child, required this.padding})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding,
+      child: Center(child: child),
+    );
+  }
+}
+
+class ProfilePicture extends StatelessWidget {
+  const ProfilePicture({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: 150,
+        height: 150,
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.cyan, width: 3.0),
+            ),
+            child: ClipOval(
+              child: Image.asset(
+                'assets/images/IMG_7364.JPG',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ContactInfo extends StatelessWidget {
+  const ContactInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 14),
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: ListView(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          CustomCard(
+            icon: Icons.phone_android_rounded,
+            title: 'Telefono',
+            subtitle: '1234567890',
+          ),
+          CustomCard(
+            icon: Icons.email,
+            title: 'Email',
+            subtitle: 'alejandro@example.com',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  const CustomCard({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Color(0xFFE0F7FA),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      margin: EdgeInsets.only(bottom: 8.0),
+      child: ListTile(
+        leading: Icon(
+          icon,
+          color: Color.fromARGB(244, 32, 159, 168),
+        ),
+        title: Text(title),
+        subtitle: Text(subtitle),
+      ),
+    );
+  }
+}
+
 class AboutPage extends StatelessWidget {
   const AboutPage({Key? key}) : super(key: key);
 
@@ -152,10 +196,10 @@ class AboutPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 110.0),
                   child: Text(
                     'Acerca de mi',
@@ -166,7 +210,7 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 30,
                 ),
                 RichText(
@@ -189,7 +233,7 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50),
+                  padding: EdgeInsets.only(top: 50),
                   child: Image.asset(
                     'assets/images/frame.png',
                     width: 150,
