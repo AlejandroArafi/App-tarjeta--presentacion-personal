@@ -4,42 +4,171 @@ void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatefulWidget {
+class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
 
   @override
-  _MainAppState createState() => _MainAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/about': (context) => const AboutPage(),
+      },
+    );
+  }
 }
 
-class _MainAppState extends State<MainApp> {
-  int _selectedIndex = 0;
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Perfil')),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 130.0),
+              child: Center(
+                child: Text(
+                  ' ',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                width: 150,
+                height: 150,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.cyan, width: 3.0),
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/IMG_7364.JPG',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const Center(
+              child: Text(
+                'Alejandro Figueroa',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontFamily: 'CaviarDreams',
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 80.0),
+              child: Text(
+                'Front end Developer',
+                style: TextStyle(fontSize: 30, fontFamily: 'Autography'),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 14),
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Card(
+                    color: const Color(0xFFE0F7FA),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8.0),
+                    child: const ListTile(
+                      leading: Icon(
+                        Icons.phone_android_rounded,
+                        color: Color.fromARGB(244, 32, 159, 168),
+                      ),
+                      title: Text('Telefono'),
+                      subtitle: Text('1234567890'),
+                    ),
+                  ),
+                  Card(
+                    color: const Color(0xFFE0F7FA),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8.0),
+                    child: const ListTile(
+                      leading: Icon(Icons.email,
+                          color: Color.fromARGB(244, 32, 159, 168)),
+                      title: Text('Email'),
+                      subtitle: Text('alejandro@example.com'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outlined),
+            label: 'Perfil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.navigate_next),
+            label: 'Acerca de',
+          )
+        ],
+        currentIndex: 0,
+        selectedItemColor: Colors.cyan,
+        onTap: (index) {
+          if (index == 1) {
+            Navigator.pushNamed(context, '/about');
+          }
+        },
+      ),
+    );
   }
+}
 
-  Widget _getBody() {
-    switch (_selectedIndex) {
-      case 1:
-        return SafeArea(
-            child: Center(
+class AboutPage extends StatelessWidget {
+  const AboutPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Acerca de')),
+      body: SafeArea(
+        child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 110.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 110.0),
                   child: Text(
                     'Acerca de mi',
                     style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'CaviarDreams'),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'CaviarDreams',
+                    ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(
+                  height: 30,
+                ),
                 RichText(
                   text: TextSpan(
                     style: DefaultTextStyle.of(context).style.copyWith(
@@ -47,11 +176,15 @@ class _MainAppState extends State<MainApp> {
                         ),
                     children: const <TextSpan>[
                       TextSpan(
-                          text:
-                              'Apasionado desarrollador Front-End con un enfoque en la creación de soluciones web responsivas y atractivas. Comprometido con la excelencia en cada proyecto, mi objetivo es fusionar habilidades técnicas con creatividad para ofrecer una gran experiencia al usuario Con experiencia tanto en el desarrollo web como en el diseño de aplicaciones móviles, busco constantemente desafíos que me permitan expandir mis conocimientos y superar expectativas.',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'CaviarDreams')),
+                        text:
+                            'Apasionado desarrollador Front-End con un enfoque en la creación de soluciones web responsivas y atractivas. Comprometido con la excelencia en cada proyecto, mi objetivo es fusionar habilidades técnicas con creatividad para ofrecer una gran experiencia al usuario. Con experiencia tanto en el desarrollo web como en el diseño de aplicaciones móviles, busco constantemente desafíos que me permitan expandir mis conocimientos y superar expectativas.',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'CaviarDreams',
+                          fontSize: 15,
+                          backgroundColor: Colors.transparent,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -65,127 +198,6 @@ class _MainAppState extends State<MainApp> {
               ],
             ),
           ),
-        ));
-
-      // Página de Perfil
-      case 0:
-        return SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 130.0),
-                child: Center(
-                  child: Text(
-                    ' ',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-              ),
-              Center(
-                child: Container(
-                  width: 150,
-                  height: 150,
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.cyan, width: 3.0),
-                      ),
-                      child: ClipOval(
-                        child: Image.asset(
-                          'assets/images/IMG_7364.JPG',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const Center(
-                child: Text(
-                  'Alejandro Figueroa',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontFamily: 'CaviarDreams',
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 80.0),
-                child: Text(
-                  'Front end Developer',
-                  style: TextStyle(fontSize: 30, fontFamily: 'Autography'),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 14),
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    Card(
-                      color: Color(0xFFE0F7FA),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      margin: EdgeInsets.only(bottom: 8.0),
-                      child: const ListTile(
-                        leading: Icon(
-                          Icons.phone_android_rounded,
-                          color: Color.fromARGB(244, 32, 159, 168),
-                        ),
-                        title: Text('Telefono'),
-                        subtitle: Text('1234567890'),
-                      ),
-                    ),
-                    Card(
-                      color: const Color(0xFFE0F7FA),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      margin: const EdgeInsets.only(bottom: 8.0),
-                      child: const ListTile(
-                        leading: Icon(Icons.email,
-                            color: Color.fromARGB(244, 32, 159, 168)),
-                        title: Text('Email'),
-                        subtitle: Text('alejandro@example.com'),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      default:
-        return const Center(child: Text('Página no encontrada'));
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: _getBody(),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              label: 'Perfil',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.navigate_next),
-              label: 'Acerca de',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.cyan,
-          onTap: _onItemTapped,
         ),
       ),
     );
